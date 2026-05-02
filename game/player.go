@@ -46,7 +46,7 @@ func (p *Player) Update() {
 
 	if ebiten.IsKeyPressed(ebiten.KeySpace) && p.laserLoadingTimer.IsReady() {
 	p.laserLoadingTimer.Reset()
-	
+
 	bounds := p.image.Bounds()
 
 	halfw := float64(bounds.Dx()) / 2 
@@ -71,5 +71,12 @@ func (p *Player) Draw(screen *ebiten.Image){
 
 	//desenho da imagem
 	screen.DrawImage(p.image, op)
-	}
+}
 
+func (p *Player) Collider() Rect {
+	bounds := p.image.Bounds()
+	return NewRect(p.position.X,
+		p.position.Y,
+		float64(bounds.Dx()),
+		float64(bounds.Dy()))
+}
